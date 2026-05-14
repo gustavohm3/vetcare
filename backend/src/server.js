@@ -1,0 +1,29 @@
+require("dotenv").config();
+
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+
+app.get("/", (req, res) => {
+  res.status(200).json({
+    status: "online",
+    message: "VetCare API funcionando"
+  });
+});
+
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => {
+    console.log("MongoDB conectado com sucesso");
+
+    app.listen(process.env.PORT, () => {
+      console.log(`Servidor rodando na porta ${process.env.PORT}`);
+    });
+  })
+  .catch((error) => {
+    console.error("Erro ao conectar no MongoDB:", error);
+  });
