@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const clientRoutes = require("./routes/clientRoutes");
 const petRoutes = require("./routes/petRoutes");
+const authRoutes = require("./routes/authRoutes");
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use(express.json());
 
 app.use("/clients", clientRoutes);
 app.use("/pets", petRoutes);
+app.use("/auth", authRoutes);
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 
