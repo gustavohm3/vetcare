@@ -1,3 +1,32 @@
+/**
+ * @swagger
+ * tags:
+ *   name: Pets
+ *   description: Gerenciamento de pets
+ */
+
+/**
+ * @swagger
+ * /pets:
+ *   get:
+ *     summary: Lista todos os pets
+ *     tags: [Pets]
+ *     responses:
+ *       200:
+ *         description: Lista de pets
+ */
+
+/**
+ * @swagger
+ * /pets:
+ *   post:
+ *     summary: Cria um pet
+ *     tags: [Pets]
+ *     responses:
+ *       201:
+ *         description: Pet criado
+ */
+
 const express = require("express");
 const router = express.Router();
 
