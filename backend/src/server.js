@@ -3,11 +3,15 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const clientRoutes = require("./routes/clientRoutes");
+const petRoutes = require("./routes/petRoutes");
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use("/clients", clientRoutes);
+app.use("/pets", petRoutes);
 
 app.get("/", (req, res) => {
   res.status(200).json({
