@@ -3,8 +3,12 @@ import api from "../services/api";
 
 function PetsPage() {
   const [pets, setPets] = useState([]);
+
   const [name, setName] = useState("");
   const [species, setSpecies] = useState("");
+  const [breed, setBreed] = useState("");
+  const [age, setAge] = useState("");
+  const [ownerId, setOwnerId] = useState("");
 
   const loadPets = async () => {
     try {
@@ -19,13 +23,20 @@ function PetsPage() {
     try {
       await api.post("/pets", {
         name,
-        species
+        species,
+        breed,
+        age,
+        ownerId
       });
 
       setName("");
       setSpecies("");
+      setBreed("");
+      setAge("");
+      setOwnerId("");
 
       loadPets();
+
     } catch (error) {
       console.error(error);
       alert("Erro ao cadastrar pet");
@@ -53,7 +64,27 @@ function PetsPage() {
           onChange={(e) => setSpecies(e.target.value)}
         />
 
-        <button onClick={createPet}>Cadastrar</button>
+        <input
+          placeholder="Raça"
+          value={breed}
+          onChange={(e) => setBreed(e.target.value)}
+        />
+
+        <input
+          placeholder="Idade"
+          value={age}
+          onChange={(e) => setAge(e.target.value)}
+        />
+
+        <input
+          placeholder="ID do dono"
+          value={ownerId}
+          onChange={(e) => setOwnerId(e.target.value)}
+        />
+
+        <button onClick={createPet}>
+          Cadastrar
+        </button>
       </div>
 
       <h2>Lista de pets</h2>
