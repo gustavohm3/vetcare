@@ -3,6 +3,7 @@ import api from "../services/api";
 
 function PetsPage() {
   const [pets, setPets] = useState([]);
+  const [clients, setClients] = useState([]);
 
   const [name, setName] = useState("");
   const [species, setSpecies] = useState("");
@@ -14,6 +15,15 @@ function PetsPage() {
     try {
       const response = await api.get("/pets");
       setPets(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const loadClients = async () => {
+    try {
+      const response = await api.get("/clients");
+      setClients(response.data);
     } catch (error) {
       console.error(error);
     }
@@ -45,13 +55,22 @@ function PetsPage() {
 
   useEffect(() => {
     loadPets();
+    loadClients();
   }, []);
 
   return (
     <div style={{ padding: "30px", color: "black" }}>
       <h1>VetCare - Pets</h1>
 
-      <div style={{ marginBottom: "20px" }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "10px",
+          maxWidth: "300px",
+          marginBottom: "30px"
+        }}
+      >
         <input
           placeholder="Nome do pet"
           value={name}
@@ -71,19 +90,29 @@ function PetsPage() {
         />
 
         <input
+          type="number"
           placeholder="Idade"
           value={age}
           onChange={(e) => setAge(e.target.value)}
         />
 
-        <input
-          placeholder="ID do dono"
+        <select
           value={ownerId}
           onChange={(e) => setOwnerId(e.target.value)}
-        />
+        >
+          <option value="">
+            Selecione o dono
+          </option>
+
+          {clients.map((client) => (
+            <option key={client._id} value={client._id}>
+              {client.name}
+            </option>
+          ))}
+        </select>
 
         <button onClick={createPet}>
-          Cadastrar
+          Cadastrar Pet
         </button>
       </div>
 
@@ -92,7 +121,7 @@ function PetsPage() {
       <ul>
         {pets.map((pet) => (
           <li key={pet._id}>
-            {pet.name} - {pet.species}
+            <strong>{pet.name}</strong> - {pet.species}
           </li>
         ))}
       </ul>

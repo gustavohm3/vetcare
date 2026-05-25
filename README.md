@@ -1,25 +1,27 @@
 # VetCare
 
-Sistema web para gerenciamento de clínica veterinária desenvolvido para a disciplina **Arquitetura de Aplicações Web — 2026.1**.
+Projeto desenvolvido para a disciplina de Arquitetura de Aplicações Web.
 
-## Descrição
+O sistema simula uma clínica veterinária simples, permitindo o cadastro de clientes e pets através de uma API REST integrada com MongoDB.
 
-O VetCare é uma aplicação web para gerenciamento de clientes e pets de uma clínica veterinária.
+Além do backend, também foi desenvolvido um frontend em React consumindo a API de forma assíncrona.
 
-A aplicação permite:
+---
+
+# Funcionalidades
 
 - Cadastro de clientes
 - Listagem de clientes
 - Cadastro de pets
 - Listagem de pets
 - Registro e login de usuários
-- Consumo assíncrono da API no frontend
+- Documentação da API com Swagger
 
 ---
 
-## Tecnologias utilizadas
+# Tecnologias utilizadas
 
-### Backend
+## Backend
 - Node.js
 - Express
 - MongoDB
@@ -27,114 +29,86 @@ A aplicação permite:
 - JWT
 - Swagger
 
-### Frontend
+## Frontend
 - React
 - Vite
 - Axios
-- React Router DOM
 
-### Infraestrutura
+## Outros
 - Docker
 - Docker Compose
 
 ---
 
-## Pré-requisitos
+# Como executar o projeto
 
-Instalar:
-
-- Node.js v22+
-- Docker Desktop
-- Git
-
----
-
-## Como executar
-
-### 1. Clonar o projeto
+*1. Clonar o repositório
 
 ```bash
 git clone https://github.com/gustavohm3/vetcare.git
-```
 
----
+*2. Subir o MongoDB com Docker*
 
-### 2. Subir o MongoDB
+Na raiz do projeto:
 
-```bash
 docker compose up -d
-```
 
----
+*3. Rodar o backend*
 
-### 3. Rodar o backend
-
-```bash
 cd backend
 npm install
 npm run dev
-```
 
-Backend disponível em:
-
+Backend:
 http://localhost:5000
 
----
+Swagger:
+http://localhost:5000/api-docs
 
-### 4. Rodar o frontend
+*4. Rodar o frontend*
 
-```bash
 cd frontend
 npm install
 npm run dev
-```
 
-Frontend disponível em:
-
+Frontend:
 http://localhost:5173
 
----
+*Variáveis de ambiente*
 
-## Documentação Swagger
+Criar um arquivo .env dentro da pasta backend:
 
-A documentação da API está disponível em:
-
-http://localhost:5000/api-docs
-
----
-
-## Variáveis de ambiente
-
-Criar arquivo `.env` dentro de `backend`:
-
-```env
 PORT=5000
 MONGO_URI=mongodb://localhost:27017/vetcare
 JWT_SECRET=segredo123
-```
 
----
+*Endpoints principais*
 
-## Endpoints principais
+*Auth*
 
-### Autenticação
-- POST /auth/register
-- POST /auth/login
+POST /auth/register
+POST /auth/login
 
-### Clientes
-- GET /clients
-- POST /clients
-- PUT /clients/:id
-- DELETE /clients/:id
+*Clients*
 
-### Pets
-- GET /pets
-- POST /pets
-- PUT /pets/:id
-- DELETE /pets/:id
+GET /clients
+POST /clients
+PUT /clients/:id
+DELETE /clients/:id
 
----
+*Pets*
 
-## Autor
+GET /pets
+POST /pets
+PUT /pets/:id
+DELETE /pets/:id
+
+*Observações*
+
+O projeto foi desenvolvido utilizando MongoDB em container Docker para facilitar a configuração do ambiente local.
+
+O frontend consome os dados da API utilizando Axios e atualização assíncrona sem recarregar a página.
+
+*Autor*
 
 Gustavo Henrique
