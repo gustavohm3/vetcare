@@ -4,76 +4,87 @@ import api from "../services/api";
 function ClientsPage() {
   const [clients, setClients] = useState([]);
   const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
 
-  const loadClients = async () => {
-    try {
-      const response = await api.get("/clients");
-      setClients(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const createClient = async () => {
-    try {
-      await api.post("/clients", {
-        name,
-        phone,
-        email
-      });
-
-      setName("");
-      setPhone("");
-      setEmail("");
-
-      loadClients();
-    } catch (error) {
-      console.error(error);
-      alert("Erro ao cadastrar cliente");
-    }
-  };
+  async function loadClients() {
+    const response = await api.get("/clients");
+    setClients(response.data);
+  }
 
   useEffect(() => {
     loadClients();
   }, []);
 
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    await api.post("/clients", {
+      name,
+      email,
+    });
+
+    setName("");
+    setEmail("");
+
+    loadClients();
+  }
+
   return (
-    <div style={{ padding: "30px", color: "black" }}>
-      <h1>VetCare - Clientes</h1>
+    <div>
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-3xl font-bold text-gray-800">
+          Clientes
+        </h2>
 
-      <div style={{ marginBottom: "20px" }}>
-        <input
-          placeholder="Nome"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-
-        <input
-          placeholder="Telefone"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-        />
-
-        <input
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-
-        <button onClick={createClient}>Cadastrar</button>
+        <div className="bg-cyan-100 text-cyan-700 px-4 py-2 rounded-xl font-semibold">
+          {clients.length} clientes
+        </div>
       </div>
 
-      <h2>Lista de clientes</h2>
+      <form
+        onSubmit={handleSubmit}
+        className="bg-gray-50 border border-gray-200 rounded-2xl p-6 flex flex-col gap-4 mb-8 shadow-sm"
+      >
+        <input
+          type="text"
+          placeholder="Nome do cliente"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="bg-white border border-gray-300 px-3 py-2 rounded-xl text-sm outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-100 transition"
+        />
 
-      <ul>
+        <input
+          type="email"
+          placeholder="Email do cliente"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="bg-white border border-gray-300 px-3 py-2 rounded-xl text-sm outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-100 transition"
+        />
+
+        <button
+          type="submit"
+          className="bg-teal-700 hover:bg-cyan-700 text-white px-4 py-2 rounded-xl font-semibold shadow-md transition"
+        >
+          Cadastrar Cliente
+        </button>
+      </form>
+
+      <div className="space-y-4 max-h-[500px] overflow-y-auto pr-2">
         {clients.map((client) => (
-          <li key={client._id}>
-            {client.name} - {client.email}
-          </li>
+          <div
+            key={client._id}
+            className="bg-white border border-gray-300 px-3 py-2 rounded-xl text-sm outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-100 transition"
+          >
+            <h3 className="text-lg font-bold text-gray-800">
+              {client.name}
+            </h3>
+
+            <p className="text-gray-600 mt-1">
+              {client.email}
+            </p>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }

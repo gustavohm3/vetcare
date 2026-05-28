@@ -1,20 +1,37 @@
-import { Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import MainLayout from "./layout/MainLayout";
+
+import Dashboard from "./pages/Dashboard";
 import ClientsPage from "./pages/ClientsPage";
 import PetsPage from "./pages/PetsPage";
 
 function App() {
   return (
-    <div style={{ padding: "20px", color: "black" }}>
-      <nav style={{ marginBottom: "20px" }}>
-        <Link to="/">Clientes</Link> |{" "}
-        <Link to="/pets">Pets</Link>
-      </nav>
-
+    <BrowserRouter>
       <Routes>
-        <Route path="/" element={<ClientsPage />} />
-        <Route path="/pets" element={<PetsPage />} />
+
+        <Route path="/" element={<MainLayout />}>
+
+          <Route
+            index
+            element={<Dashboard />}
+          />
+
+          <Route
+            path="clients"
+            element={<ClientsPage />}
+          />
+
+          <Route
+            path="pets"
+            element={<PetsPage />}
+          />
+
+        </Route>
+
       </Routes>
-    </div>
+    </BrowserRouter>
   );
 }
 
