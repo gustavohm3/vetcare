@@ -6,8 +6,10 @@ Sistema web para gerenciamento de clientes e pets de uma clínica veterinária, 
 
 O projeto tem como objetivo aplicar conceitos de desenvolvimento através da construção de uma aplicação capaz de realizar o cadastro e consulta de clientes e seus respectivos pets.
 
-Tecnologias Utilizadas
+## Tecnologias Utilizadas
+
 Frontend
+
 React
 React Router DOM
 Axios
@@ -62,10 +64,6 @@ Mongoose
 
     Modelagem e validação dos dados
 
-JWT
-
-    Autenticação baseada em token
-
 Swagger
 
     Documentação e testes dos endpoints
@@ -76,7 +74,6 @@ Swagger
 - Listagem de clientes
 - Cadastro de pets
 - Listagem de pets
-- Registro e login de usuários
 
 ---
 ## Estrutura do Projeto
