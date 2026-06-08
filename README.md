@@ -8,7 +8,7 @@ O projeto tem como objetivo aplicar conceitos de desenvolvimento através da con
 
 ## Tecnologias Utilizadas
 
-Frontend
+## Frontend
 
 React
 React Router DOM
