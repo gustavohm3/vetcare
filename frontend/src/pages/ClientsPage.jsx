@@ -21,12 +21,12 @@ function ClientsPage() {
     await api.post("/clients", {
       name,
       email,
-      phone,
+      // phone,
     });
 
     setName("");
     setEmail("");
-    setPhone("");
+    // setPhone("");
 
     loadClients();
   }
@@ -55,13 +55,13 @@ function ClientsPage() {
           className="bg-white border border-gray-300 px-3 py-2 rounded-xl text-sm outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-100 transition"
         />
 
-        <input
+        {/* <input
           type="text"
           placeholder="Telefone do cliente"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
           className="bg-white border border-gray-300 px-3 py-2 rounded-xl text-sm outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-100 transition"
-        />
+        /> */}
 
         <input
           type="email"
@@ -93,9 +93,9 @@ function ClientsPage() {
               {client.email}
             </p>
 
-            <p className="text-gray-600">
+            {/* <p className="text-gray-600">
               {client.phone}
-            </p>
+            </p> */}
           </div>
         ))}
       </div>
