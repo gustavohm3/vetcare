@@ -21,10 +21,12 @@ function ClientsPage() {
     await api.post("/clients", {
       name,
       email,
+      phone,
     });
 
     setName("");
     setEmail("");
+    setPhone("");
 
     loadClients();
   }
@@ -50,6 +52,14 @@ function ClientsPage() {
           placeholder="Nome do cliente"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          className="bg-white border border-gray-300 px-3 py-2 rounded-xl text-sm outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-100 transition"
+        />
+
+        <input
+          type="text"
+          placeholder="Telefone do cliente"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
           className="bg-white border border-gray-300 px-3 py-2 rounded-xl text-sm outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-100 transition"
         />
 
@@ -81,6 +91,10 @@ function ClientsPage() {
 
             <p className="text-gray-600 mt-1">
               {client.email}
+            </p>
+
+            <p className="text-gray-600">
+              {client.phone}
             </p>
           </div>
         ))}
